@@ -291,6 +291,7 @@ function love.resize(w, h)
 end
 
 local TARGET_FPS = 60
+local TARGET_UPS = 1000
 
 --[[
 -- OLD RUN CODE BELOW
@@ -361,29 +362,35 @@ function love.run()
 
 	if love.timer then love.timer.step() end
 
+    local u_tacc = 0
     local tacc = 0
     local start_time = love.timer.getTime()
 
     return function()
+        local ut = love.timer.getTime() 
+        runsystem.updatedelta = ut - start_time
+
         if love.event then
-            love.event.pump()
-            for n, a, b, c, d, e, f in love.event.poll() do
-                if n == 'quit' then
-                    if not love.quit or not love.quit() then
-                        return a or 0
+            u_tacc = u_tacc + runsystem.updatedelta
+            
+            if u_tacc >= 1 / TARGET_UPS then
+                runsystem.updatefps = 1 / u_tacc
+                u_tacc = 0
+                love.event.pump()
+                for n, a, b, c, d, e, f in love.event.poll() do
+                    if n == 'quit' then
+                        if not love.quit or not love.quit() then
+                            return a or 0
+                        end
                     end
+                    love.handlers[n](a, b, c, d, e, f)
                 end
-                love.handlers[n](a, b, c, d, e, f)
             end
         end
 
         if love.timer then
 			processBGMFadeout(love.timer.step())
 		end
-
-        local ut = love.timer.getTime() 
-        runsystem.updatedelta = ut - start_time
-        runsystem.updatefps = 1 / (ut - start_time)
 
         if scene and scene.update and love.timer then
             local delta = ut - start_time
