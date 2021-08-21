@@ -45,6 +45,10 @@ function GameScene:render()
 	self.game:draw(self.paused)
 end
 
+function GameScene:fastUpdate(d)
+    self.game:fastUpdate(d) -- Propagate the fast updates
+end
+
 function GameScene:onInputPress(e)
 	if (
 		self.game.game_over or self.game.completed

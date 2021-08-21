@@ -4,6 +4,7 @@ Scene = Object:extend()
 
 function Scene:new() end
 function Scene:update() end
+function Scene:fastUpdate(dt) end -- Equivalent to GameMode:fastUpdate(dt)
 function Scene:render() end
 function Scene:onInputPress() end
 function Scene:onInputRelease() end

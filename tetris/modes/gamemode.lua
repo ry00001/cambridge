@@ -952,4 +952,11 @@ function GameMode:provideSettings()
     return {} 
 end
 
+-- This function is called on every love.event.poll
+-- aka up to the UPS specified in main.lua.
+-- By default this is 1000, so this function will run
+-- up to 1000 times per second! Don't do anything
+-- expensive in here, as this WILL slow the game down.
+function GameMode:fastUpdate(deltaTime) end
+
 return GameMode

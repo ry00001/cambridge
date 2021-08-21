@@ -381,7 +381,13 @@ function love.run()
             
             if u_tacc >= 1 / TARGET_UPS then
                 runsystem.updatefps = 1 / u_tacc
+
+                if scene and scene.fastUpdate then
+                    scene:fastUpdate(u_tacc)
+                end
+
                 u_tacc = 0
+
                 love.event.pump()
                 for n, a, b, c, d, e, f in love.event.poll() do
                     if n == 'quit' then
