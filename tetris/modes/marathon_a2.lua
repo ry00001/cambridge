@@ -14,8 +14,8 @@ MarathonA2Game.tagline = "The points don't matter! Can you reach the invisible r
 
 
 
-function MarathonA2Game:new()
-	MarathonA2Game.super:new()
+function MarathonA2Game:new(cfg)
+	MarathonA2Game.super:new(cfg)
 
 	self.roll_frames = 0
 	self.combo = 1
@@ -38,8 +38,8 @@ function MarathonA2Game:new()
 	self.additive_gravity = false
 	self.lock_drop = false
 	self.lock_hard_drop = false
-	self.enable_hold = false
-	self.next_queue_length = 1
+	self.enable_hold = cfg.allowHold == 2
+	self.next_queue_length = cfg.nextQueue == 2 and 3 or 1
 end
 
 function MarathonA2Game:getARE()
@@ -401,6 +401,13 @@ end
 
 function MarathonA2Game:getBackground()
 	return math.floor(self.level / 100)
+end
+
+function MarathonA2Game:provideSettings()
+    return {
+        {"allowHold", "Allow hold", {"No", "Yes"}},
+        {"nextQueue", "Next pieces", {"One", "Three"}}
+    }
 end
 
 return MarathonA2Game

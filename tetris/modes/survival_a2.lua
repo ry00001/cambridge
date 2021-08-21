@@ -14,8 +14,8 @@ SurvivalA2Game.tagline = "The game starts fast and only gets faster!"
 
 
 
-function SurvivalA2Game:new()
-	SurvivalA2Game.super:new()
+function SurvivalA2Game:new(cfg)
+	SurvivalA2Game.super:new(cfg)
 	self.roll_frames = 0
 	self.combo = 1
 	self.randomizer = History6RollsRandomizer()
@@ -28,6 +28,8 @@ function SurvivalA2Game:new()
 
 	self.lock_drop = true
 	self.lock_hard_drop = true
+    self.enable_hold = cfg.allowHold == 2
+	self.next_queue_length = cfg.nextQueue == 2 and 3 or 1
 end
 
 function SurvivalA2Game:getARE()
@@ -183,6 +185,13 @@ function SurvivalA2Game:getHighscoreData()
 		level = self.level,
 		frames = self.frames,
 	}
+end
+
+function SurvivalA2Game:provideSettings()
+    return {
+        {"allowHold", "Allow hold", {"No", "Yes"}},
+        {"nextQueue", "Next pieces", {"One", "Three"}}
+    }
 end
 
 return SurvivalA2Game
