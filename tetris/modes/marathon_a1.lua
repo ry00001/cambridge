@@ -254,6 +254,15 @@ function MarathonA1Game:provideSettings()
         {"allowHardDrop", "Allow hard drop", {"No", "Yes"}}
     }
 
+--[[
+    local opts = {}
+    for i=1, 10 do
+        opts[i] = i
+    end
+
+    table.insert(t, {"manyOptions", "Many options", opts})
+]]
+
     return t
 end
 

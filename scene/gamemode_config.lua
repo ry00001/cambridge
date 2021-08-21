@@ -59,9 +59,23 @@ function GamemodeConfigScene:render()
                 love.graphics.printf(setting, 100 + 110 * j, 100 + i * 20, 100, "center")
             end
         else
+            local curr_index = new_config[option[1]]
+            local prev_index = Mod1(curr_index-1, #option[3])
+            local next_index = Mod1(curr_index+1, #option[3])
+
+            love.graphics.setColor(1, 1, 1, 0.5)
+            love.graphics.printf(option[3][prev_index],
+                                 100 + 110 * 1, 100 + i * 20, 100, 'center')
+
             love.graphics.setColor(1, 1, 1, 1)
-            love.graphics.printf(option[3][new_config[option[1]]], -- what an indexer
-                                100 + 110 * 1, 100 + i * 20, 100, 'center')
+            love.graphics.printf("< " .. option[3][curr_index] .. " >",
+                                100 + 110 * 2.5, 100 + i * 20, 100, 'center')
+
+            love.graphics.setColor(1, 1, 1, 0.5)
+            love.graphics.printf(option[3][next_index],
+                                 100 + 110 * 4, 100 + i * 20, 100, 'center')
+
+            love.graphics.setColor(1, 1, 1, 1)
         end
 	end
 end
