@@ -15,7 +15,7 @@ GameMode.hash = ""
 GameMode.tagline = ""
 GameMode.rollOpacityFunction = function(age) return 0 end
 
-function GameMode:new(config, secret_inputs)
+function GameMode:new(secret_inputs, config)
 	self.grid = Grid(10, 24)
 	self.randomizer = Randomizer()
 	self.piece = nil

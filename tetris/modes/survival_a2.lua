@@ -14,8 +14,8 @@ SurvivalA2Game.tagline = "The game starts fast and only gets faster!"
 
 
 
-function SurvivalA2Game:new(cfg)
-	SurvivalA2Game.super:new(cfg)
+function SurvivalA2Game:new(_, cfg)
+	SurvivalA2Game.super:new(_, cfg)
 	self.roll_frames = 0
 	self.combo = 1
 	self.randomizer = History6RollsRandomizer()

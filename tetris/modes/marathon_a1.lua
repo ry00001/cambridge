@@ -14,8 +14,8 @@ MarathonA1Game.tagline = "Can you score enough points to reach the title of Gran
 
 
 
-function MarathonA1Game:new(cfg)
-	MarathonA1Game.super:new(cfg)
+function MarathonA1Game:new(_, cfg)
+	MarathonA1Game.super:new(_, cfg)
 	
 	self.roll_frames = 0
 	self.combo = 1
