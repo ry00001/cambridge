@@ -14,8 +14,8 @@ MarathonA1Game.tagline = "Can you score enough points to reach the title of Gran
 
 
 
-function MarathonA1Game:new()
-	MarathonA1Game.super:new()
+function MarathonA1Game:new(cfg)
+	MarathonA1Game.super:new(cfg)
 	
 	self.roll_frames = 0
 	self.combo = 1
@@ -35,9 +35,9 @@ function MarathonA1Game:new()
 
 	self.additive_gravity = false
 	self.lock_drop = false
-	self.enable_hard_drop = false
-	self.enable_hold = false
-	self.next_queue_length = 1
+	self.enable_hard_drop = self.config.allowHardDrop == 2
+	self.enable_hold = self.config.allowHold == 2
+	self.next_queue_length = self.config.nextQueue == 2 and 3 or 1
 end
 
 function MarathonA1Game:getARE()
@@ -245,6 +245,16 @@ function MarathonA1Game:getHighscoreData()
 		level = self.level,
 		frames = self.frames,
 	}
+end
+
+function MarathonA1Game:provideSettings()
+    local t = {
+        {"allowHold", "Allow hold", {"No", "Yes"}},
+        {"nextQueue", "Next pieces", {"One", "Three"}},
+        {"allowHardDrop", "Allow hard drop", {"No", "Yes"}}
+    }
+
+    return t
 end
 
 return MarathonA1Game

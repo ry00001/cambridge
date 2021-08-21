@@ -35,6 +35,27 @@ function initConfig()
 	if config.secret == nil then config.secret = false end
 
 	if not config.gamesettings then config.gamesettings = {} end
+    if not config.gamemodesettings then config.gamemodesettings = {} end
+
+--[[
+    {
+        marathonA1 = {
+            allowHold = 1,
+            ...
+        }
+    }
+]]
+
+    for _, a in ipairs(game_modes) do
+        -- load config options for every mode
+        local mc = {}
+        local conf = a:provideSettings()
+        for i, j in pairs(conf) do
+            mc[j[1]] = (config.gamemodesettings[a.hash] or {})[j[1]] or 1
+        end
+        config.gamemodesettings[a.hash] = mc
+    end
+
 	for _, option in ipairs(GameConfigScene.options) do
 		if not config.gamesettings[option[1]] then
 			config.gamesettings[option[1]] = 1

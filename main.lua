@@ -9,6 +9,7 @@ function love.load()
 	require "load.save"
 	require "load.bigint"
 	require "load.version"
+    require "load.inspect"
 	loadSave()
 	require "funcs"
 	require "scene"
@@ -30,14 +31,19 @@ function love.load()
 	-- used for screenshots
 	GLOBAL_CANVAS = love.graphics.newCanvas()
 
+	-- import custom modules
+	initModules()
+
+    -- it is IMPORTANT that this comes before initConfig,
+    -- because modules' configuration options need to be
+    -- known at load-time!!! this will crash if this
+    -- is put back the way it used to be.
+
 	-- init config
 	initConfig()
 
 	love.window.setFullscreen(config["fullscreen"])
 	if config.secret then playSE("welcome") end
-
-	-- import custom modules
-	initModules()
 end
 
 function initModules()

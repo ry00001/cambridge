@@ -87,6 +87,12 @@ function ModeSelectScene:onInputPress(e)
 		playSE("cursor_lr")
 	elseif e.input == "menu_back" or e.scancode == "delete" or e.scancode == "backspace" then
 		scene = TitleScene()
+    elseif e.input == "hold" or e.scancode == "tab" then
+		current_mode = self.menu_state.mode
+		current_ruleset = self.menu_state.ruleset
+		config.current_mode = current_mode
+		config.current_ruleset = current_ruleset
+        scene = GamemodeConfigScene(game_modes[self.menu_state.mode])
 	elseif e.input then
 		self.secret_inputs[e.input] = true
 	end

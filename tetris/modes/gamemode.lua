@@ -15,7 +15,7 @@ GameMode.hash = ""
 GameMode.tagline = ""
 GameMode.rollOpacityFunction = function(age) return 0 end
 
-function GameMode:new(secret_inputs)
+function GameMode:new(config, secret_inputs)
 	self.grid = Grid(10, 24)
 	self.randomizer = Randomizer()
 	self.piece = nil
@@ -72,6 +72,8 @@ function GameMode:new(secret_inputs)
 	self.section_start_time = 0
 	self.section_times = { [0] = 0 }
 	self.secondary_section_times = { [0] = 0 }
+    
+    self.config = config
 end
 
 function GameMode:getARR() return 1 end
@@ -944,6 +946,10 @@ function GameMode:draw(paused)
 	elseif self.game_over then
 		self:onGameOver()
 	end
+end
+
+function GameMode:provideSettings()
+    return {} 
 end
 
 return GameMode
