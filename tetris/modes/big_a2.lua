@@ -7,8 +7,8 @@ BigA2Game.name = "Big A2"
 BigA2Game.hash = "BigA2"
 BigA2Game.tagline = "Big blocks in the most celebrated TGM mode!"
 
-function BigA2Game:new()
-	BigA2Game.super:new()
+function BigA2Game:new(_, c)
+	BigA2Game.super:new(_, c)
 	self.big_mode = true
 end
 
