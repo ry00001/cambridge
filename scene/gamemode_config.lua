@@ -12,6 +12,8 @@ function GamemodeConfigScene:new(gamemode)
     mode_config = gamemode:provideSettings() or {}
     optioncount = #mode_config
 
+    print(selected_mode.hash)
+
     self.highlight = 1
 
     for i, j in pairs(mode_config) do
@@ -25,7 +27,7 @@ function GamemodeConfigScene:new(gamemode)
 end
 
 function GamemodeConfigScene:save()
-    config.gamemodesettings[selected_mode.hash] = new_config
+    config.gamemodesettings[selected_mode.hash] = copy(new_config)
 end
 
 function GamemodeConfigScene:render()
